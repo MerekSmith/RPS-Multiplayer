@@ -1,0 +1,68 @@
+body {
+	background-color: lightblue;
+}
+
+header {
+	background-color: #1468e6;
+}
+
+h1 {
+	text-align: center;
+	margin: 15px 0px 15px 0px;
+}
+
+h4 {
+	text-align: center;
+}
+
+.userFormRow {
+	margin-left: 280px;
+	margin-right: 280px;
+}
+
+#user-name-input {
+	display: inline-block;
+	/* float: left; */
+	width: 300px;
+}
+
+.playerForm {
+	margin-left: 100px;
+}
+
+.playersInfo {
+	width: 1070px;
+	margin: auto;
+}
+
+.playerBoxes {
+	width: 300px;
+	height: 250px;
+	border: solid 1px black;
+	margin: 25px;
+	display: inline-block;
+}
+
+.chat {
+	margin: auto;
+}
+
+.chatForm {
+	margin-left: 100px;
+}
+
+.chatArea {
+	margin-left: 120px;
+	margin-right: 120px;
+}
+
+#chatBox {
+	width: 700px;
+	height: 250px;
+	background-color: white;
+}
+
+#chat-input {
+	display: inline-block;
+	width: 635px;
+}

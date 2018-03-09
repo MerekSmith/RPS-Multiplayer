@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+
+	<!-- Personal CSS -->
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<title>Multiplayer Rock Paper Scissor!</title>
+</head>
+
+<body>
+	<div class="container">
+		<header class="row">
+			<h1>Rock Paper Scissors</h1>
+		</header>
+		<br>
+		<div class="row userFormRow">
+			<div class="playerForm">
+				<form action="input">
+					<input class="form-control" id="user-name-input" type="text" placeholder="Name">
+					<input class="btn btn-primary" id="user-name-submit" type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+
+		<div class="row" id="name-selected-area">
+			<!-- This is where the text will go once a user has entered their name. It will replace the name form. -->
+		</div>
+
+		<!-- Boxes for players and game results info -->
+		<div class="row playersInfo">
+			<div class="playerBoxes" id="player-one-box">
+				<h4>Waiting for Player 1</h4>
+			</div>
+			<div class="playerBoxes" id="results-box">
+				<h4>Submit Your Name To Get Started</h4>
+			</div>
+			<div class="playerBoxes" id="player-two-box">
+				<h4>Waiting for Player 2</h4>
+			</div>
+		</div>
+
+		<!-- Chat box form -->
+		<div class="row chatArea">
+			<div id="chatBox" class="chat"></div>
+				<div class="chatForm">
+					<form action="input">
+						<input class="form-control" id="chat-input" type="text">
+						<input class="btn btn-primary" id="chat-submit" type="submit" value="Send">
+					</form>
+				</div>
+		</div>
+
+
+		<!-- End of container -->
+	</div>
+
+	<!-- jQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- My Javascript -->
+	<script src="assets/javascript/app.js"></script>
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+</body>
+
+</html>
