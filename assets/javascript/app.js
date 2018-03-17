@@ -16,6 +16,7 @@ $(document).ready(function () {
 
 
 	var database = firebase.database();
+	var playerName;
 	var playerOneSelected = false;
 	var playerTwoSelected = false;
 	var playerCount = 0;
@@ -36,7 +37,7 @@ $(document).ready(function () {
 	var opponentTies = 0;
 	var revealTime;
 	var intervalTime;
-		
+
 	playersRef.on('value', function (playersSnapshot) {
 
 		playerOneExists = playersSnapshot.child('1').exists();
@@ -129,7 +130,7 @@ $(document).ready(function () {
 		// This stops the page from refreshing after submit is hit.
 		event.preventDefault(event);
 		// store players name that is submitted.
-		var playerName = $('#user-name-input').val().trim();
+		playerName = $('#user-name-input').val().trim();
 
 		// If player 1 does NOT exist, then put in player 1 slot. //
 		if (!playerOneExists) {
@@ -198,8 +199,8 @@ $(document).ready(function () {
 				$('#selectionArea').empty();
 				$('#selectionArea').html('<h2 id="userSelection">' + userSelection + '</h2>');
 				$('#opponentSelectionArea').html('<h2 id="opponentSelection">' + opponentSelection + '</h2>');
-				
-				
+
+
 				compareSelections(selectionSnapshot)
 			}
 
@@ -211,7 +212,7 @@ $(document).ready(function () {
 	function compareSelections(selectionSnapshot) {
 
 		var userName = selectionSnapshot.child(playerNum + '/name').val()
-		console.log('snapshot test',userName)
+		console.log('snapshot test', userName)
 		userWins = selectionSnapshot.child(playerNum + '/wins').val()
 		userLosses = selectionSnapshot.child(playerNum + '/losses').val()
 		userTies = selectionSnapshot.child(playerNum + '/ties').val()
@@ -219,7 +220,7 @@ $(document).ready(function () {
 		opponentWins = selectionSnapshot.child(opponentNum + '/wins').val()
 		opponentLosses = selectionSnapshot.child(opponentNum + '/losses').val()
 		opponentTies = selectionSnapshot.child(opponentNum + '/ties').val()
-		
+
 		// TODO: run if function for timer to complete the below once 3 seconds has passed.
 
 		if ((userSelection === "Rock") && (opponentSelection === "Scissors")) {
@@ -253,9 +254,9 @@ $(document).ready(function () {
 		};
 
 		// Updates firebase with new numbers. This should update the opponents numbers as well on their end.
-		
+
 		revealTimer()
-		
+
 	};
 
 	function revealTimer() {
@@ -264,7 +265,7 @@ $(document).ready(function () {
 		intervalTime = setInterval(updateScores, 1000);
 	};
 
-	
+
 	function updateScores() {
 		revealTime--;
 		if (revealTime === 0) {
@@ -278,6 +279,27 @@ $(document).ready(function () {
 			database.ref().child('players/' + playerNum + '/selection').remove();
 		}
 	};
+
+// Chat box input, gets saved to Firebase
+	$('#chat-submit').on('click', function (event) {
+		event.preventDefault(event);
+		if (playerNum === 1 || playerNum === 2) {
+			var message = $('#chat-input').val();
+			if (!(message === '')) {
+				database.ref().child('messages').push({
+					user: playerName,
+					message: message
+				});
+			};
+		};
+	});
+
+	// Firebase listener for chat box input.
+	database.ref('messages').on('child_added', function (chatSnapshot) {
+		var user = chatSnapshot.val().user
+		var message = chatSnapshot.val().message
+		$('#chatBox').append('<p>' + user + ': ' + message + '</p>')
+	});
 
 
 	////////////////////// End of document ready function //////////////////////
